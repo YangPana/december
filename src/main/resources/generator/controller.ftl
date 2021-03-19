@@ -1,13 +1,14 @@
 package ${basePackage}.${controllerPackage};
 
-import com.xr.common.entity.basic.ResponseBo;
-import com.xr.common.domain.common.QueryRequest;
-import com.xr.common.support.annotation.ControllerEndpoint;
-import com.xr.common.utils.XrUtils;
+import com.baomidou.mybatisplus.core.toolkit.StringPool;
+import com.yarns.december.entity.base.ResponseBo;
+import com.yarns.december.entity.base.QueryRequest;
+import com.yarns.december.support.annotation.ControllerEndpoint;
+import com.yarns.december.support.utils.CommonUtils;
 import ${basePackage}.${entityPackage}.${className};
 import ${basePackage}.${servicePackage}.${className}Service;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +26,7 @@ import java.util.Map;
 @Validated
 @RestController
 @RequestMapping("${className?uncap_first}")
+@RequiredArgsConstructor
 public class ${className}Controller {
 
     @Autowired
@@ -32,7 +34,7 @@ public class ${className}Controller {
 
     @GetMapping("list")
     public ResponseBo ${className?uncap_first}List(QueryRequest request, ${className} ${className?uncap_first}) {
-        Map<String, Object> dataTable = XrUtils.getDataTable(this.${className?uncap_first}Service.find${className}s(request, ${className?uncap_first}));
+        Map<String, Object> dataTable = CommonUtils.getDataTable(this.${className?uncap_first}Service.find${className}s(request, ${className?uncap_first}));
         return ResponseBo.result(dataTable);
     }
 

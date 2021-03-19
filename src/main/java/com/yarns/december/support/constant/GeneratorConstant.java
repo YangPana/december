@@ -14,7 +14,7 @@ public class GeneratorConstant {
     /**
      * 数据库名称
      */
-    public static final String DATABASE_NAME = "sz_core_system";
+    public static final String DATABASE_NAME = "aaaaa";
 
     /**
      * 生成代码的临时目录

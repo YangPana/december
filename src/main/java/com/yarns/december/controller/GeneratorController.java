@@ -67,15 +67,6 @@ public class GeneratorController {
         if (GeneratorConfig.TRIM_YES.equals(generatorConfig.getIsTrim())) {
             className = RegExUtils.replaceFirst(name, generatorConfig.getTrimValue(), StringUtils.EMPTY);
         }
-
-        generatorConfig.setControllerPackage("controller.sample");
-        generatorConfig.setServicePackage("service.sample");
-        generatorConfig.setServiceImplPackage("service.sample.impl");
-        generatorConfig.setMapperPackage("mapper.sample");
-        generatorConfig.setMapperXmlPackage("mapper.sample");
-        generatorConfig.setEntityPackage("entity.sample");
-
-
         generatorConfig.setTableName(name);
         generatorConfig.setClassName(CommonUtils.underscoreToCamel(className));
         generatorConfig.setTableComment(remark);
