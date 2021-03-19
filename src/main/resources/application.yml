@@ -1,0 +1,61 @@
+server:
+  port: 2323
+  undertow:
+    max-http-post-size: 0
+    # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程,数量和CPU 内核数目一样即可
+    io-threads: 4
+    # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统的负载 io-threads*8
+    worker-threads: 32
+    # 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理
+    # 每块buffer的空间大小,越小的空间被利用越充分
+    buffer-size: 1024
+    # 每个区分配的buffer数量 , 所以pool的大小是buffer-size * buffers-per-region
+    #   buffers-per-region: 1024 # 这个参数不需要写了
+    # 是否分配的直接内存
+    direct-buffers: true
+
+
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  datasource:
+    dynamic:
+      #开启mybatis sql日志打印 生产环境注意 此处会带来一定性能损耗
+      p6spy: true
+      hikari:
+        connection-timeout: 30000
+        max-lifetime: 30000
+        max-pool-size: 15
+        min-idle: 5
+        connection-test-query: select 1
+        pool-name: XrHikariCP
+      primary: base
+      datasource:
+        base:
+          username: root
+          password: 23333
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://localhost:3306/xunlei?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8&zeroDateTimeBehavior=convertToNull
+  # redis数据库
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password: 111111
+    lettuce:
+      pool:
+        min-idle: 8
+        max-idle: 500
+        max-active: 2000
+        max-wait: 10000s
+    timeout: 5000s
+
+
+mybatis-plus:
+  type-aliases-package: com.yarns.december.entity.*
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    jdbc-type-for-null: null
+  global-config:
+    banner: false
