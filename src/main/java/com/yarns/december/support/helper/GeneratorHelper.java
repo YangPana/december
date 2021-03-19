@@ -129,7 +129,7 @@ public class GeneratorHelper {
 
     private Template getTemplate(String templateName) throws Exception {
         Configuration configuration = new Configuration(Configuration.VERSION_2_3_23);
-        String templatePath = GeneratorHelper.class.getResource("/generator/templates/").getPath();
+        String templatePath = GeneratorHelper.class.getResource("/generator/").getPath();
         File file = new File(templatePath);
         if (!file.exists()) {
             templatePath = System.getProperties().getProperty(Constant.JAVA_TEMP_DIR);
